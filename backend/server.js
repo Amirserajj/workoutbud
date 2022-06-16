@@ -1,18 +1,19 @@
 import express from "express"
 import dotenv from "dotenv"
-
 dotenv.config()
+
 const app=express();
 
 //mw
+app.use(express.json());
+
 app.use((req,res,next)=>{
     console.log(req.path,req.method);
     next();
 })
 // routes
-app.get("/",(req,res)=>{
-    res.json({message:"welcome"})
-})
+import workoutRoutes from "./routes/workout.js"
+app.use("/api/workouts/",workoutRoutes)
 
 
 
